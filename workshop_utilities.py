@@ -141,11 +141,15 @@ class UMAPModel:
     def fit(self, x: Union[np.ndarray, torch.Tensor], y: Optional[Union[np.ndarray, torch.Tensor]] = None) -> None:
         """ Fit UMAP embedding. A combination of labeled and unlabeled data
         can be passed. Unlabeled instances are equal to -1. """
+        if isinstance(x, torch.Tensor):
+            x = x.cpu()
         self.model.fit(x, y=y)
         self.fitted = True
 
     def predict(self, x: Union[np.ndarray, torch.Tensor]) -> np.ndarray:
         """ Transform the input x to the embedding space. """
+        if isinstance(x, torch.Tensor):
+            x = x.cpu()
         return self.model.transform(x)
 
 
