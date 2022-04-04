@@ -1,0 +1,9 @@
+torch>=1.7.0
+alibi-detect>=0.9.1
+umap-learn
+sentence-transformers
+statsmodels
+seaborn
+datasets
+scipy
+tqdm
