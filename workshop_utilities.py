@@ -109,8 +109,8 @@ class Classifier(nn.Module):
     def forward(self, x: Union[list, np.ndarray, torch.Tensor]) -> torch.Tensor:
         if isinstance(x, list):  # If x is still a list of strings, encode with embedding_model
             x = self.embedding_model(x)
-        elif isinstance(x, np.ndarray):
-            x = torch.from_numpy().to(device)
+        elif isinstance(x, np.ndarray):  # self.head() expects Tensor
+            x = torch.from_numpy(x).to(device)
         return self.head(x)
 
 
