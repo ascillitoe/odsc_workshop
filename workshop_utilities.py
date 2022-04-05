@@ -21,6 +21,7 @@ from urllib.error import URLError
 from alibi_detect.utils.pytorch.data import TorchDataset
 from torch.utils.data import DataLoader
 import seaborn as sns
+import subprocess
 
 
 # Not a recommended practice, but we will hard code device as a global variable here
