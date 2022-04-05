@@ -106,9 +106,11 @@ class Classifier(nn.Module):
                 nn.Linear(256, n_classes)
                 )
         
-    def forward(self, x: Union[list, torch.Tensor]) -> torch.Tensor:
+    def forward(self, x: Union[list, np.ndarray, torch.Tensor]) -> torch.Tensor:
         if isinstance(x, list):  # If x is still a list of strings, encode with embedding_model
             x = self.embedding_model(x)
+        elif isinstance(x, np.ndarray):
+            x = torch.from_numpy().to(device)
         return self.head(x)
 
 
@@ -216,14 +218,6 @@ def plot_clusters(x: np.ndarray, y: np.ndarray,
     handles, labels  =  ax.get_legend_handles_labels()
     ax.legend(handles, classes, loc='center left', bbox_to_anchor=(1, 0.5))
 
-#    plt.scatter(*x.T, s=10, c=y, cmap='tab20', alpha=1.0)
-#    plt.setp(ax, xticks=[], yticks=[])
-#    idx = np.unique(y)
-#    classes = np.array(classes)[idx]
-#    nc = len(classes)
-#    cbar = plt.colorbar(boundaries=np.arange(nc+1)-0.5)
-#    cbar.set_ticks(np.arange(nc))
-#    cbar.set_ticklabels(classes)
     # Title
     if title:
         plt.title(title)
@@ -290,7 +284,7 @@ def plot_hist(
     methods: List[str] = ['MMD', 'CA-MMD']
 ):
     for p_val, method, color in zip(p_vals, methods, colors):
-        sns.histplot(p_val, color=color, kde=True, label=f'{method}')
+        sns.histplot(p_val, color=color, kde=True, label=f'{method}', bins=20)
         plt.legend(loc='upper right')
     plt.xlim(0, 1)
 #    plt.ylim(0, 20)
