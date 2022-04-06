@@ -7,3 +7,5 @@ seaborn
 datasets
 scipy
 tqdm
+jupyter
+numpy<=1.21

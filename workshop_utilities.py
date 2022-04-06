@@ -111,7 +111,7 @@ class Classifier(nn.Module):
             x = self.embedding_model(x)
         elif isinstance(x, np.ndarray):  # self.head() expects Tensor
             x = torch.from_numpy(x).to(device)
-        return self.head(x)
+        return self.head(x).detach()
 
 
 class UMAPModel:
@@ -215,6 +215,8 @@ def plot_clusters(x: np.ndarray, y: np.ndarray,
     x = x.T
     sns.scatterplot(x=x[0], y=x[1], hue=y, palette="deep")
     # Legend
+    idx = np.unique(y)
+    classes = np.array(classes)[idx]
     handles, labels  =  ax.get_legend_handles_labels()
     ax.legend(handles, classes, loc='center left', bbox_to_anchor=(1, 0.5))
 
@@ -281,13 +283,15 @@ def plot_hist(
     p_vals: List[np.ndarray],
     title: str,
     colors: List[str] = ['salmon', 'turquoise'],
-    methods: List[str] = ['MMD', 'CA-MMD']
+    methods: List[str] = ['MMD', 'CA-MMD'],
+    ylim: Optional[tuple] = None
 ):
     for p_val, method, color in zip(p_vals, methods, colors):
-        sns.histplot(p_val, color=color, kde=True, label=f'{method}', bins=20)
+        sns.histplot(p_val, color=color, kde=True, label=f'{method}', binwidth=0.05, stat='probability')
         plt.legend(loc='upper right')
-    plt.xlim(0, 1)
-#    plt.ylim(0, 20)
+    plt.xlim(-0.02, 1.02)
+    if ylim is not None:
+        plt.ylim(ylim)
     plt.ylabel('Density')
     plt.xlabel('p-values')
     plt.title(title)
