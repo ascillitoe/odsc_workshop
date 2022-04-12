@@ -111,7 +111,7 @@ class Classifier(nn.Module):
             x = self.embedding_model(x)
         elif isinstance(x, np.ndarray):  # self.head() expects Tensor
             x = torch.from_numpy(x).to(device)
-        return self.head(x).detach()
+        return self.head(x)
 
 
 class UMAPModel:
