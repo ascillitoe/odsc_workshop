@@ -29,6 +29,8 @@ Open the notebook:
 jupyter-notebook intro_to_drift_detection.ipynb
 ```
 
+**Note**: The dataset and models can be fetched in advance by running `python workshop_utilities.py` after cloning the repo.
+
 ## Requirements
 
-You will require a working Python installation (version 3.7 - 3.9) and `jupyter` (installed with the above `pip install`).
+You will require working installations of Python (version 3.7 - 3.9) and `jupyter` (installed with the above `pip install`).
