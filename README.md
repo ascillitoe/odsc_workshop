@@ -6,7 +6,7 @@ This repo contains the companion notebook for our [ODSC 2022 workshop](https://o
 
 ### Running on Colab
 
-The easiest way to get started is to open up the workshop notebook in Google Colab by [clicking here](https://colab.research.google.com/github/ascillitoe/odsc_workshop/blob/main/intro_to_drift_detection_master.ipynb).
+The easiest way to get started is to open up the workshop notebook in Google Colab by [clicking here](https://colab.research.google.com/github/ascillitoe/odsc_workshop/blob/main/intro_to_drift_detection.ipynb).
 
 The notebook will run most efficiently on a GPU. To select a GPU runtime on Colab navigate to ***Runtime -> Change runtime type*** and select ***GPU*** under ***Hardware accelerator***.
 
