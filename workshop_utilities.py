@@ -40,12 +40,14 @@ def fetch_prerequisites():
 
     # Download the 20newsgroup dataset with scikit-learn
     try:
+        print('Fetching 20 newsgroups dataset...')
         dataset = fetch_20newsgroups(subset='all', shuffle=True, random_state=42, data_home=CACHE_FOLDER)
     except URLError as e:
         raise Exception('Download failed, check your internet connection') from e
 
     # Load the sentence transformer model
     # (see https://huggingface.co/sentence-transformers/paraphrase-MiniLM-L6-v2)
+    print('Fetching the HuggingFace sentence transformer...')
     try:
         filepath = CACHE_FOLDER.joinpath('sentence-transformers_paraphrase-MiniLM-L6-v2')
         sentence_transformer = SentenceTransformer(filepath)
